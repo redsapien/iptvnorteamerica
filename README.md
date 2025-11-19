@@ -1,2 +1,0 @@
-# iptvnorteamerica
-Repo de propuesta

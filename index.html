@@ -1,0 +1,394 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Propuesta de Asociación Estratégica IPTV - Red Sapien</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700;900&display=swap" rel="stylesheet">
+    <style>
+        /* --- Paleta y Base --- */
+        :root {
+            --color-bg: #0A0A10;
+            --color-bg-secondary: #191924;
+            --color-primary: #A060FF; /* Morado más vibrante */
+            --color-secondary: #F81F2D; /* Rojo más intenso */
+            --color-accent: #00D1FF;
+            --color-text: #FFFFFF;
+            --color-text-muted: #C0C0C0;
+        }
+        html { scroll-behavior: smooth; }
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--color-bg);
+            color: var(--color-text);
+            margin: 0;
+            padding: 0;
+            overflow-x: hidden;
+        }
+
+        /* --- Estructura y Animaciones --- */
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 25px; }
+        section { padding: 120px 0; overflow: hidden; position: relative; }
+        .reveal { opacity: 0; transform: translateY(60px); transition: opacity 1.2s ease-out, transform 1.2s ease-out; }
+        .reveal.visible { opacity: 1; transform: translateY(0); }
+
+        /* --- Tipografía y Títulos --- */
+        h1, h2, h3 { font-weight: 900; letter-spacing: -1.5px; }
+        h1 { font-size: clamp(2.8rem, 6vw, 5rem); line-height: 1.1; text-shadow: 0 0 25px rgba(160, 96, 255, 0.4); }
+        h2 { font-size: clamp(2.2rem, 5vw, 3.5rem); text-align: center; margin-bottom: 70px; }
+        h3 { font-size: 1.75rem; color: var(--color-text); margin-bottom: 15px; }
+        p { font-size: 1.15rem; line-height: 1.8; color: var(--color-text-muted); }
+        .gradient-text {
+            background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            text-fill-color: transparent;
+        }
+
+        /* --- Botones --- */
+        .cta-button {
+            display: inline-block;
+            background: linear-gradient(90deg, var(--color-primary), var(--color-accent));
+            color: white;
+            font-weight: 700;
+            font-size: 1.1rem;
+            padding: 18px 40px;
+            border-radius: 50px;
+            text-decoration: none;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+        .cta-button:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 40px rgba(160, 96, 255, 0.4);
+        }
+
+        /* --- Sección 1: Hero --- */
+        .hero { min-height: 100vh; display: flex; align-items: center; text-align: center; }
+        #particles-js { position: absolute; width: 100%; height: 100%; top: 0; left: 0; z-index: 0; }
+        .hero .container { position: relative; z-index: 1; }
+        .hero p { max-width: 750px; margin: 30px auto 40px; font-size: 1.25rem; }
+        #typewriter { border-right: 3px solid var(--color-accent); animation: blink 0.7s steps(1) infinite; }
+        @keyframes blink { 50% { border-color: transparent; } }
+        .hero-name {
+            display: inline-block;
+            position: relative;
+            animation: shimmer 4s infinite;
+        }
+        @keyframes shimmer {
+            0%, 100% { text-shadow: 0 0 10px var(--color-primary), 0 0 20px var(--color-primary), 0 0 30px var(--color-accent); }
+            50% { text-shadow: 0 0 20px var(--color-accent), 0 0 30px var(--color-accent), 0 0 40px var(--color-primary); }
+        }
+
+        /* --- Sección 2: TV Effect --- */
+        .tv-section { text-align: center; }
+        .tv-frame { background: #111; border-radius: 30px; padding: 20px; box-shadow: 0 20px 60px rgba(0,0,0,0.7); display: inline-block; margin-top: 40px; border: 2px solid #333; }
+        .tv-screen { background: #000; width: 100%; max-width: 800px; height: 450px; display: flex; justify-content: center; align-items: center; border-radius: 10px; overflow: hidden; position: relative; }
+        .tv-screen::before { content: ''; position: absolute; top: 0; left: 0; right: 0; bottom: 0; background: linear-gradient(rgba(255,255,255,0.05) 1px, transparent 1px), linear-gradient(90deg, rgba(255,255,255,0.05) 1px, transparent 1px); background-size: 3px 3px; opacity: 0.3; animation: scanlines 10s linear infinite; }
+        @keyframes scanlines { 0% { background-position: 0 0; } 100% { background-position: 0 100px; } }
+        #tv-typewriter { font-family: 'Courier New', Courier, monospace; font-size: clamp(1.5rem, 4vw, 2.5rem); color: #00FF41; text-shadow: 0 0 10px #00FF41; padding: 20px; }
+
+        /* --- Sección 3: Tech Cards --- */
+        .tech-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(320px, 1fr)); gap: 30px; }
+        .tech-card { background: var(--color-bg-secondary); border: 1px solid #2a2a3a; border-radius: 15px; padding: 35px; transition: transform 0.4s ease, background 0.4s ease; position: relative; overflow: hidden; }
+        .tech-card:hover { transform: translateY(-10px); background: #20202c; }
+        .tech-card .icon { font-size: 3rem; margin-bottom: 20px; animation: float 5s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-15px); } }
+        .tech-card:nth-child(2) .icon { animation-delay: 1s; }
+        .tech-card:nth-child(3) .icon { animation-delay: 2s; }
+
+        /* --- Sección 4: Case Study --- */
+        #proof { background-color: var(--color-bg-secondary); }
+        .proof-content { display: grid; grid-template-columns: 1fr 1.5fr; align-items: center; gap: 60px; }
+        .stats .stat-item { margin-bottom: 40px; }
+        .stat-number { font-size: 4.5rem; font-weight: 900; background: linear-gradient(90deg, var(--color-primary), var(--color-secondary)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; background-clip: text; text-fill-color: transparent; }
+        .stat-label { font-size: 1.2rem; color: var(--color-text-muted); }
+        @media (max-width: 768px) { .proof-content { grid-template-columns: 1fr; text-align: center;} }
+
+        /* --- Sección 5: Blueprint --- */
+        .blueprint-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 40px; }
+        .step-card { background: var(--color-bg-secondary); padding: 30px; border-radius: 15px; border-left: 5px solid var(--color-primary); transition: box-shadow 0.3s ease; }
+        .step-card:hover { box-shadow: 0 10px 30px rgba(0,0,0,0.4); }
+        .step-number { font-size: 3rem; font-weight: 900; color: rgba(160, 96, 255, 0.2); margin-bottom: -10px; }
+        @media (max-width: 768px) { .blueprint-grid { grid-template-columns: 1fr; } }
+
+        /* --- Sección 6: CTA Final --- */
+        #partnership { text-align: center; }
+        #partnership .container { max-width: 850px; }
+    </style>
+</head>
+<body>
+
+    <section class="hero">
+        <div id="particles-js"></div>
+        <div class="container reveal">
+            <p style="font-size: 1.5rem; margin-bottom: 10px;">Hola, <span class="gradient-text hero-name">Laura, Miranda 👑</span></p>
+            <h1>Tienes un producto excelente. Juntos, lo convertiremos en un <span id="typewriter">negocio imparable.</span></h1>
+            <p>El éxito en el mercado de IPTV no depende solo de la calidad del streaming. Depende de un ecosistema tecnológico robusto, procesos de venta automatizados y una operación que escale sin fricción.</p>
+            <a href="#opportunity" class="cta-button">Iniciemos la Evolución</a>
+        </div>
+    </section>
+
+    <section id="opportunity">
+        <div class="container">
+            <h2 class="reveal">Entendemos a tu Cliente: Latinos en USA (18-56)</h2>
+            <p class="reveal" style="text-align: center; max-width: 800px; margin: -50px auto 60px;">Buscan más que canales. Buscan una conexión estable con su cultura. Hombres apasionados por los deportes, mujeres por sus novelas y familias por entretenimiento de calidad. Su lealtad se gana con una experiencia impecable.</p>
+            <div class="tv-frame reveal">
+                <div class="tv-screen"><span id="tv-typewriter"></span></div>
+            </div>
+        </div>
+    </section>
+
+    <section id="technology" style="background-color: var(--color-bg-secondary);">
+        <div class="container">
+            <h2 class="reveal">Nuestra Misión: Transformar tu Operación</h2>
+            <div class="tech-grid">
+                <div class="tech-card reveal">
+                    <div class="icon">⚙️</div>
+                    <h3>Procesos de Venta Automatizados</h3>
+                    <p>Construimos un motor que convierte clics en clientes. Desde la pauta publicitaria hasta una bandeja de entrada centralizada para tus agentes, cada paso está diseñado para maximizar la conversión.</p>
+                </div>
+                <div class="tech-card reveal">
+                    <div class="icon">📈</div>
+                    <h3>Inteligencia de Negocio y Retención</h3>
+                    <p>Implementamos flujos de remarketing y notificación para no solo vender, sino para construir una cartera de clientes fieles, aumentando el valor de vida de cada suscripción.</p>
+                </div>
+                <div class="tech-card reveal">
+                    <div class="icon">🌐</div>
+                    <h3>Infraestructura y Soporte de Élite</h3>
+                    <p>Diseñamos sistemas de soporte omnicanal y optimizamos tu servicio para la infraestructura de ISPs en EE.UU., garantizando la estabilidad que genera confianza y reduce cancelaciones.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="proof">
+        <div class="container">
+            <h2 class="reveal">Resultados, no Promesas.</h2>
+            <div class="proof-content reveal">
+                <div class="stats">
+                    <div class="stat-item">
+                        <div class="stat-number">19x</div>
+                        <div class="stat-label">Retorno de Inversión (ROI)</div>
+                    </div>
+                    <div class="stat-item">
+                        <div class="stat-number">>85%</div>
+                        <div class="stat-label">Tasa de Retención de Clientes</div>
+                    </div>
+                </div>
+                <div class="description">
+                    <h3>Nuestra Experiencia en Acción</h3>
+                    <p>Con un socio en el mercado de IPTV para EE.UU., transformamos su operación. El resultado fue un sistema de crecimiento predecible que nos permitió escalar la inversión publicitaria de forma rentable, logrando un ROI de x19.</p>
+                    <p style="margin-top: 20px;">Más importante aún, construimos procesos que generaron una cartera de clientes fieles, la base de un negocio saludable y de largo plazo. Sabemos cómo hacerlo.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="blueprint" style="background-color: var(--color-bg-secondary);">
+        <div class="container">
+            <h2 class="reveal">El Blueprint de Evolución</h2>
+            <div class="blueprint-grid">
+                <div class="step-card reveal">
+                    <div class="step-number">01</div>
+                    <h3>Diagnóstico y Arquitectura</h3>
+                    <p>Auditamos tu ecosistema actual para diseñar una arquitectura de procesos y tecnología enfocada en la máxima eficiencia y escalabilidad.</p>
+                </div>
+                <div class="step-card reveal">
+                    <div class="step-number">02</div>
+                    <h3>Construcción del Motor</h3>
+                    <p>Implementamos el sistema de ventas, soporte y retención automatizado, dejando una máquina de crecimiento lista para operar 24/7.</p>
+                </div>
+                <div class="step-card reveal">
+                    <div class="step-number">03</div>
+                    <h3>Lanzamiento y Captación</h3>
+                    <p>Activamos las campañas de adquisición, atrayendo clientes de alto valor y llenando tu embudo con prospectos listos para comprar.</p>
+                </div>
+                <div class="step-card reveal">
+                    <div class="step-number">04</div>
+                    <h3>Optimización Continua</h3>
+                    <p>Analizamos los datos en tiempo real para refinar cada engranaje del sistema, asegurando que tu rentabilidad crezca mes a mes.</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="partnership">
+        <div class="container reveal">
+            <h2>Seamos Socios en tu Crecimiento</h2>
+            <p>Esto es más que un servicio; es una propuesta de asociación para construir juntos el futuro de tu negocio. Estamos listos para invertir nuestra experiencia y tecnología en tu visión.</p>
+            <a href="https://wa.me/573122650913?text=Hola,%20estoy%20lista%20para%20evolucionar%20mi%20negocio%20de%20IPTV." target="_blank" class="cta-button" style="margin-top: 30px;">Agendar Sesión Estratégica Gratuita</a>
+        </div>
+    </section>
+
+    <script>
+        // --- Script para Animaciones de Scroll ---
+        document.addEventListener('DOMContentLoaded', function() {
+            const revealElements = document.querySelectorAll('.reveal');
+            const observer = new IntersectionObserver((entries) => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.classList.add('visible');
+                    }
+                });
+            }, { threshold: 0.1 });
+            revealElements.forEach(elem => observer.observe(elem));
+
+            // --- Script para Máquina de Escribir del Hero ---
+            const typewriterElement = document.getElementById('typewriter');
+            const words = ["negocio imparable.", "operación de élite.", "futuro escalable."];
+            let wordIndex = 0;
+            let letterIndex = 0;
+            let isDeleting = false;
+            function typeHero() {
+                const currentWord = words[wordIndex];
+                const speed = isDeleting ? 75 : 150;
+                if (isDeleting) {
+                    typewriterElement.innerHTML = currentWord.substring(0, letterIndex - 1);
+                    letterIndex--;
+                    if (letterIndex === 0) {
+                        isDeleting = false;
+                        wordIndex = (wordIndex + 1) % words.length;
+                    }
+                } else {
+                    typewriterElement.innerHTML = currentWord.substring(0, letterIndex + 1);
+                    letterIndex++;
+                    if (letterIndex === currentWord.length) {
+                        isDeleting = true;
+                        setTimeout(typeHero, 2000);
+                        return;
+                    }
+                }
+                setTimeout(typeHero, speed);
+            }
+            if(typewriterElement) typeHero();
+
+            // --- Script para Máquina de Escribir de la TV ---
+            const tvTypewriterElement = document.getElementById('tv-typewriter');
+            const tvWords = ["Deportes en vivo.", "Estabilidad HD.", "Tus novelas favoritas.", "Sin interrupciones."];
+            let tvWordIndex = 0;
+            let tvLetterIndex = 0;
+            let tvIsDeleting = false;
+            function typeTV() {
+                if (!tvTypewriterElement) return;
+                const currentWord = tvWords[tvWordIndex];
+                const speed = tvIsDeleting ? 50 : 100;
+                if (tvIsDeleting) {
+                    tvTypewriterElement.innerHTML = currentWord.substring(0, tvLetterIndex - 1);
+                    tvLetterIndex--;
+                    if (tvLetterIndex === 0) {
+                        tvIsDeleting = false;
+                        tvWordIndex = (tvWordIndex + 1) % tvWords.length;
+                    }
+                } else {
+                    tvTypewriterElement.innerHTML = currentWord.substring(0, tvLetterIndex + 1);
+                    tvLetterIndex++;
+                    if (tvLetterIndex === currentWord.length) {
+                        tvIsDeleting = true;
+                        setTimeout(typeTV, 2500);
+                        return;
+                    }
+                }
+                setTimeout(typeTV, speed);
+            }
+            const tvObserver = new IntersectionObserver((entries) => {
+                if (entries[0].isIntersecting) {
+                    setTimeout(typeTV, 500);
+                    tvObserver.disconnect();
+                }
+            }, { threshold: 0.5 });
+            if(tvTypewriterElement) tvObserver.observe(tvTypewriterElement);
+        });
+    </script>
+    
+    <script>
+        // --- Script para Partículas ---
+        // NOTE: This is a self-contained, simplified particle script to avoid external dependencies.
+        (function(){
+            const pJS = function(tag_id){
+                const container = document.getElementById(tag_id);
+                if (!container) return;
+                
+                const canvas = document.createElement('canvas');
+                canvas.style.position = 'absolute';
+                canvas.style.top = 0;
+                canvas.style.left = 0;
+                canvas.style.width = '100%';
+                canvas.style.height = '100%';
+                canvas.style.zIndex = 0;
+                container.appendChild(canvas);
+                
+                const ctx = canvas.getContext('2d');
+                let particles = [];
+                
+                const resize = () => {
+                    canvas.width = container.offsetWidth;
+                    canvas.height = container.offsetHeight;
+                };
+                window.addEventListener('resize', resize);
+                resize();
+
+                class Particle {
+                    constructor() {
+                        this.x = Math.random() * canvas.width;
+                        this.y = Math.random() * canvas.height;
+                        this.vx = Math.random() * 0.4 - 0.2;
+                        this.vy = Math.random() * 0.4 - 0.2;
+                        this.radius = Math.random() * 1.5 + 0.5;
+                    }
+                    update() {
+                        this.x += this.vx;
+                        this.y += this.vy;
+                        if (this.x < 0 || this.x > canvas.width) this.vx *= -1;
+                        if (this.y < 0 || this.y > canvas.height) this.vy *= -1;
+                    }
+                    draw() {
+                        ctx.beginPath();
+                        ctx.arc(this.x, this.y, this.radius, 0, Math.PI * 2);
+                        ctx.fillStyle = 'rgba(160, 96, 255, 0.5)';
+                        ctx.fill();
+                    }
+                }
+
+                function init() {
+                    const particleCount = Math.floor(canvas.width / 20);
+                    for (let i = 0; i < particleCount; i++) {
+                        particles.push(new Particle());
+                    }
+                }
+
+                function animate() {
+                    ctx.clearRect(0, 0, canvas.width, canvas.height);
+                    for (const p of particles) {
+                        p.update();
+                        p.draw();
+                    }
+                    for (let i = 0; i < particles.length; i++) {
+                        for (let j = i; j < particles.length; j++) {
+                            const dist = Math.hypot(particles[i].x - particles[j].x, particles[i].y - particles[j].y);
+                            if (dist < 120) {
+                                ctx.beginPath();
+                                ctx.moveTo(particles[i].x, particles[i].y);
+                                ctx.lineTo(particles[j].x, particles[j].y);
+                                ctx.strokeStyle = `rgba(160, 96, 255, ${0.8 - dist / 120})`;
+                                ctx.stroke();
+                            }
+                        }
+                    }
+                    requestAnimationFrame(animate);
+                }
+                
+                init();
+                animate();
+            };
+            window.particlesJS = pJS;
+        })();
+        particlesJS('particles-js');
+    </script>
+
+</body>
+</html>
